@@ -71,18 +71,19 @@
                     case 2:
                         //Borrow book
 
-                        Console.WriteLine("Enter title of book:");
-                        String tiBook = Console.ReadLine();
-                        Console.WriteLine("Enter borrow name of the book");
-                        String BorrName = Console.ReadLine();
+                        Console.WriteLine("Enter title  or ISDN of book:");
+                        String keyBook = Console.ReadLine();
+                       
+                        
+                        
 
                         bool bookFound = false;
 
                         for (int i = 0; i < 100; i++)
                         {
-                            if (tiBook == titles[i])
+                            if (keyBook == titles[i] || keyBook== ISDNs[i] )
                             {
-                                borrowNames[i] = BorrName;
+                                borrowNames[i] = keyBook;
 
                                 bookFound = true;
                                 break;
@@ -170,13 +171,13 @@
                         break;
                     case 5:
                         //List all avaiable books
-                        for (int i = 0; i < 100; i++)
-                        { 
-                            Console.WriteLine("Enter book title:"); 
-                            titles[i] = Console.ReadLine(); } 
-                       for (int i = 0; i < 100; i++) 
-                            { 
-                            Console.WriteLine("Book " + (i+1) + " is " + titles[i]); 
+                        for (int i = 0; i <titles.Length; i++)
+                        {
+                            Console.WriteLine("The books avciable in this library:");
+
+
+                            Console.WriteLine( titles[i] + ISDNs[i] + bookAvailiabilityStatus);
+                            
                         }
                         break;
                     case 6:
