@@ -7,7 +7,7 @@
             //sorted input
             string[] titles = new string[100];
             string[] ISDNs = new string[100];
-            bool bookAvailiabilityStatus = bool.Parse("true");
+            bool[] bookAvailiabilityStatus = new bool[100];
             String[] borrowNames = new string[100];
             String[] bookAuthers = new string[100];
             int LastBookIndexTreacker = -1;
@@ -16,7 +16,7 @@
 
             titles[0] = "Math";
             ISDNs[0] = "1346";
-            bookAvailiabilityStatus= true;
+            bookAvailiabilityStatus= [true];
             borrowNames[0] = "null";
             bookAuthers[0] = "Ali";
             LastBookIndexTreacker++;
@@ -24,7 +24,7 @@
 
             titles[0] = "English";
             ISDNs[0] = "3456";
-            bookAvailiabilityStatus = true;
+            bookAvailiabilityStatus = [true];
             borrowNames[0] = "null";
             bookAuthers[0] = "Fatma";
             LastBookIndexTreacker++;
@@ -51,7 +51,7 @@
                         //Add new book
                         Console.WriteLine("Enter a book title:"); 
                         titles[LastBookIndexTreacker] = Console.ReadLine(); 
-                        bookAvailiabilityStatus = true; 
+                        bookAvailiabilityStatus = [true]; 
                         Console.WriteLine("Availability of book: " + bookAvailiabilityStatus); 
                         ISDNs[LastBookIndexTreacker] = "123" + LastBookIndexTreacker; 
                         Console.WriteLine("Book added successfully"); 
@@ -103,32 +103,43 @@
 
                     case 3:
                         //Return book
-                        Console.WriteLine("Enter title of the book");
-                        String titBook2= Console.ReadLine();
-                        Console.WriteLine("Enter return name of the book");
-                        string returnBook = Console.ReadLine();
-
-                        bool bookFound2 = true;
-
-                        for (int i = 0; i < 100; i++)
+                        Console.WriteLine("Enter title or ISDN of book:");
+                        String keyBook2= Console.ReadLine();
+                        Console.WriteLine("Enter return name of the book"); 
+                        string returnBook = Console.ReadLine(); 
+                        bool bookFound2 = false;
+                       
+                        for (int i = 0; i < titles.Length; i++)
                         {
-                            if (titBook2 == titles[i])
+                            if (keyBook2 == ISDNs[i])
                             {
-                                ISDNs[i] += returnBook;
+                                if (bookAvailiabilityStatus[i] = true)
+                                {
+                                    borrowNames[i] = returnBook;
+                                    bookFound2 = true;
+                                    break;
 
-                                bookFound = true;
-                                break;
+
+
+
+
+
+                                   
+                                }
+
                             }
 
-                        }
-                        if (bookFound2 == false)
-                        {
-                            Console.WriteLine("account not found");
-                        }
-                        else
-                        {
-                            Console.WriteLine("Retrun succeefuly");
-                        }
+                            }
+                            
+                        
+                        if (bookFound = false)
+                            {
+                                Console.WriteLine("book not found");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Retrun succeefuly");
+                            }
 
 
                         break;
