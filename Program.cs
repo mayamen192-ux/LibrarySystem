@@ -49,15 +49,13 @@
                 {
                     case 1:
                         //Add new book
-                        Console.WriteLine("Enter a title book :");
-                        titles[LastBookIndexTreacker + 1] = Console.ReadLine();
-                        bookAvailiabilityStatus = true;
-                        Console.WriteLine("Availability of book:"+ bookAvailiabilityStatus);
-                        ISDNs[LastBookIndexTreacker + 1] = "No" + (LastBookIndexTreacker + 1);
-
-                        Console.WriteLine("Book Added  successfully!");
-                        Console.WriteLine("book Number: " + ISDNs[LastBookIndexTreacker + 1]);
-
+                        Console.WriteLine("Enter a book title:"); 
+                        titles[LastBookIndexTreacker] = Console.ReadLine(); 
+                        bookAvailiabilityStatus = true; 
+                        Console.WriteLine("Availability of book: " + bookAvailiabilityStatus); 
+                        ISDNs[LastBookIndexTreacker] = "No" + LastBookIndexTreacker; 
+                        Console.WriteLine("Book added successfully"); 
+                        Console.WriteLine("Book Number: " + ISDNs[LastBookIndexTreacker]); 
                         LastBookIndexTreacker++;
 
 
@@ -71,7 +69,34 @@
 
 
                     case 2:
-                       
+                        //Borrow book
+
+                        Console.WriteLine("Enter title of book:");
+                        String titBook = Console.ReadLine();
+                        Console.WriteLine("Enter borrow name of the book");
+                        string BorrName = Console.ReadLine();
+
+                        bool bookFound = true;
+
+                        for (int i = 0; i < 100; i++)
+                        {
+
+                            if (titBook == titles[i])
+                            {
+                                bookFound = false;
+                                break;
+                            }
+                        }
+                        if (bookFound == true)
+                        {
+                            Console.WriteLine("book not found");
+                        }
+                        else
+                        {
+                            Console.WriteLine("borrow operation succeefuly"+ BorrName);
+                        }
+
+
                         break;
 
                     case 3:
