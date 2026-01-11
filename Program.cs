@@ -80,26 +80,56 @@
 
                         for (int i = 0; i < 100; i++)
                         {
-
                             if (titBook == titles[i])
                             {
-                                bookFound = false;
+                                ISDNs[i] += BorrName;
+
+                                bookFound = true;
                                 break;
                             }
+
                         }
-                        if (bookFound == true)
+                        if (bookFound == false)
                         {
-                            Console.WriteLine("book not found");
+                            Console.WriteLine("account not found");
                         }
                         else
                         {
-                            Console.WriteLine("borrow operation succeefuly"+ BorrName);
+                            Console.WriteLine("Borrow succeefuly");
                         }
-
 
                         break;
 
                     case 3:
+                        //Return book
+                        Console.WriteLine("Enter title of the book");
+                        String titBook2= Console.ReadLine();
+                        Console.WriteLine("Enter return name of the book");
+                        string returnBook = Console.ReadLine();
+
+                        bool bookFound2 = true;
+
+                        for (int i = 0; i < 100; i++)
+                        {
+                            if (titBook2 == titles[i])
+                            {
+                                ISDNs[i] += returnBook;
+
+                                bookFound = true;
+                                break;
+                            }
+
+                        }
+                        if (bookFound2 == false)
+                        {
+                            Console.WriteLine("account not found");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Retrun succeefuly");
+                        }
+
+
                         break;
 
                     case 4:
