@@ -53,7 +53,7 @@
                         titles[LastBookIndexTreacker] = Console.ReadLine(); 
                         bookAvailiabilityStatus = true; 
                         Console.WriteLine("Availability of book: " + bookAvailiabilityStatus); 
-                        ISDNs[LastBookIndexTreacker] = "No" + LastBookIndexTreacker; 
+                        ISDNs[LastBookIndexTreacker] = "123" + LastBookIndexTreacker; 
                         Console.WriteLine("Book added successfully"); 
                         Console.WriteLine("Book Number: " + ISDNs[LastBookIndexTreacker]); 
                         LastBookIndexTreacker++;
@@ -133,9 +133,44 @@
                         break;
 
                     case 4:
-                        break;
+                        //Search book
 
+                        Console.WriteLine("Enter title of book");
+                        String titBook3= Console.ReadLine();
+                        bool accountFound4 = false;
+                       String currentBook = "NO0";
+
+                        for (int i = 0; i < 100; i++)
+                        {
+                            if (titBook3 == titles[i])
+                            {
+                                currentBook = ISDNs[i];
+                                accountFound4 = true;
+
+                                break;
+                               
+                            }
+
+                        }
+
+                        //output
+                        if (accountFound4 == false)
+                        {
+                            Console.WriteLine("sorry account not found");
+                        }
+
+                        else
+                        {
+
+
+                            Console.WriteLine("Your book = " + currentBook + bookAvailiabilityStatus);
+
+                        }
+
+                        break;
                     case 5:
+                        //List all avaiable books
+
                         break;
 
                     case 6:
