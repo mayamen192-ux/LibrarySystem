@@ -36,7 +36,7 @@ namespace LibrarySystem
 
 
             bool exit = false;
-            while (true)
+            while (exit == false)
             {
                 Console.WriteLine("Welcome to the LibrarySystem");
                 Console.WriteLine("1. Add New Book");
@@ -226,18 +226,15 @@ namespace LibrarySystem
 
 
                     case 7:
+                        Console.WriteLine("Exiting program...");
+                        Console.WriteLine("-----------------------------");
                         exit = true;
                         break;
-
                     default:
-                        Console.WriteLine("Invaild account number ");
+                        Console.WriteLine("Invalid option. Please try again.");
                         break;
                 }
 
-                if (exit == true)
-                {
-                    break;
-                }
                 Console.WriteLine("Thank you for using the Library System, press any key");
                 Console.ReadLine();
                 Console.Clear();
