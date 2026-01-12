@@ -138,53 +138,22 @@ namespace LibrarySystem
                         break;
                     case 4:
                         //Search book
-                        Console.WriteLine("Enter title of book");
-                        String titBook2 = Console.ReadLine();
-                        bool bookFound5 = false;
-                         
-                        
-                        for (int i = 0; i < titles.Length; i++)
+                        Console.Write("Enter ISBN or Title: ");
+                        string INPUT = Console.ReadLine();
+                        bool FOUND = false;
+                        for (int i = 0; i <= LastBookIndexTreacker; i++)
                         {
-                            if (titBook2 == titles[i])
+                            if (titles[i] == INPUT || ISBN[i] == INPUT)
                             {
-                               
-                                bookFound5 =true;
-
-                                Console.WriteLine("Your book deatils : " );
-                                Console.WriteLine("Title of book : " + titles[i]);
-                                Console.WriteLine("ISBN of book : " + ISDNs[i]);
-                                Console.WriteLine("Auther of book : " + bookAuthers[i]);
-                                Console.WriteLine("borrow names of book : " + borrowNames[i]);
-                                if (bookAvailiabilityStatus[i])
-                                {
-                                    Console.WriteLine("book is avaiable ");
-                                }
-                                else
-                                {
-                                    Console.WriteLine("book is  not avaiable ");
-
-                                }
-                                    break;
-                                
-
-                                    
+                                //book is found in system
+                                FOUND = true;
+                                Console.WriteLine("Book title: " + titles[i] + ", Book Author:" + bookAuthers[i] + ", Book ISBN:" + ISBN[i] + ", Book availability:" + bookAvailiabilityStatus[i]);
+                                break;
                             }
-
                         }
-                        
-
-                        //output
-                        if (bookFound5 == false)
+                        if (FOUND == false)
                         {
-                            Console.WriteLine("sorry book not found");
-                        }
-
-                        else
-                        {
-
-
-                            Console.WriteLine("search succeefuly ");
-
+                            Console.WriteLine("Book not found");
                         }
 
 
@@ -193,98 +162,64 @@ namespace LibrarySystem
                     case 5:
                         //List all available books
 
-                        Console.WriteLine("Enter Your name");
-                        String name= Console.ReadLine();
-                        bool bookF = false;
-                       
-                        String[] listOfBook =new string [100];
-
-                        for (int i = 0; i < titles.Length; i++)
+                        Console.WriteLine("Available Books:");
+                        for (int i = 0; i <= LastBookIndexTreacker; i++)
                         {
-                            if (bookAvailiabilityStatus[i])
+                            if (bookAvailiabilityStatus[i] == true)
                             {
-                                {
-                                    listOfBook[i] = " Title "+" is " + titles[i] +"  "+ "ISBNs  is "  + ISDNs[i]+" " + "Borrow name is  " +  borrowNames[i]+" " + "avaiability is  "  + bookAvailiabilityStatus[i];
-                                    Console.WriteLine("list of book: = " + listOfBook[i]);
-                                    bookF = true;
-
-                                    break;
-
-                                }
-
+                                Console.WriteLine("Title: " + titles[i] + " Author: " + bookAuthers[i] + " ISBN: " + ISBN[i]);
                             }
-                        }
-
-                        //output
-                        if (bookF == false)
-                        {
-                            Console.WriteLine("sorry book not found");
-                        }
-
-                        else
-                        {
-
-
-                            Console.WriteLine("Thank you ");
-
                         }
 
                         break;
                     
                     case 6:
                         //transfer book operation
-                        Console.WriteLine("Enter isbn of book for first person:");
-                        String fISBN= Console.ReadLine();
-                        Console.WriteLine("Enter isbn of book for second person");
-                        String sISBN = Console.ReadLine();
-
-                        bool firstFound = false;
-                        int currentBorrow = -1;
-                        string temp = " ";
-
-                        for (int i = 0; i < 100; i++)
+                        Console.Write("Enter first borrower name:");
+                        string firstBorrower = Console.ReadLine();
+                        Console.Write("Enter second borrower name:");
+                        string secondBorrower = Console.ReadLine();
+                        bool firstBorrowerFound = false;
+                        int firstBorrowerIndex = 0;
+                        for (int i = 0; i <= LastBookIndexTreacker; i++)
                         {
-                            if (fISBN == ISDNs[i])
+                            if (firstBorrower == borrowNames[i])
                             {
-                                currentBorrow = i;
-                                firstFound = true;
+                                firstBorrowerIndex = i; 
+                                firstBorrowerFound = true;
                                 break;
                             }
                         }
-                        if (firstFound == false)
+                        if (firstBorrowerFound == false)
                         {
-                            Console.WriteLine("first book not found");
+                            Console.WriteLine("current borrower name not found");
                         }
                         else
                         {
-                            bool secondFound = false;
-                            int secondBorrow = -1;
+                            bool secondBorrowerFound = false;
+                            int secondBorrowerIndex = 0;
                             for (int i = 0; i < 100; i++)
                             {
-                                if (sISBN == ISDNs[i])
+                                if (secondBorrower == borrowNames[i])
                                 {
-                                    secondBorrow = i;
-                                    secondFound = true;
+                                    secondBorrowerIndex = i;
+                                    secondBorrowerFound = true;
                                     break;
                                 }
                             }
-                            if (secondFound == false)
+                            if (secondBorrowerFound == false)
                             {
-                                Console.WriteLine("second book not found");
+                                Console.WriteLine("New borrower name not found");
                             }
                             else
                             {
-                                temp = ISDNs[currentBorrow]; 
-                                ISDNs[currentBorrow] = ISDNs[secondBorrow]; 
-                                ISDNs[secondBorrow] = temp;
-
-                                Console.WriteLine(" transfer successfully  " + temp);
+                                string temp = "";
+                                temp = borrowNames[firstBorrowerIndex];
+                                borrowNames[firstBorrowerIndex] = borrowNames[secondBorrowerIndex];
+                                borrowNames[secondBorrowerIndex] = temp;
                             }
-                           
+                        }
 
-
-                }
-                        
 
                         break;
 
