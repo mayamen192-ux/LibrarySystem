@@ -197,28 +197,30 @@ namespace LibrarySystem
                     case 5:
                         //List all available books
 
-                        Console.WriteLine("Enter title of book");
-                        String titBook3= Console.ReadLine();
-                        bool accountFound4 = false;
+                        Console.WriteLine("Enter Your name");
+                        String name= Console.ReadLine();
+                        bool bookF = false;
                        
                         String[] listOfBook =new string [100];
 
                         for (int i = 0; i < titles.Length; i++)
                         {
-                            if (titBook3 == titles[i])
+                            if (bookAvailiabilityStatus[i])
                             {
-                                listOfBook[i] = titles[i] + ISDNs[i] + bookAvailiabilityStatus[i] + borrowNames[i];
-                                Console.WriteLine("list of book: = " + listOfBook[i]);
-                                accountFound4 = true;
+                                {
+                                    listOfBook[i] = " Title "+" is " + titles[i] +"  "+ "ISBNs  is "  + ISDNs[i]+" " + "Borrow name is  " +  borrowNames[i]+" " + "avaiability is  "  + bookAvailiabilityStatus[i];
+                                    Console.WriteLine("list of book: = " + listOfBook[i]);
+                                    bookF = true;
 
-                                break;
-                               
+                                    break;
+
+                                }
+
                             }
-
                         }
 
                         //output
-                        if (accountFound4 == false)
+                        if (bookF == false)
                         {
                             Console.WriteLine("sorry book not found");
                         }
@@ -251,7 +253,7 @@ namespace LibrarySystem
                 {
                     break;
                 }
-                Console.WriteLine("Thank you for using the Bank System, press any key");
+                Console.WriteLine("Thank you for using the Library System, press any key");
                 Console.ReadLine();
                 Console.Clear();
 
