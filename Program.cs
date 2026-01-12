@@ -1,4 +1,6 @@
-﻿namespace LibrarySystem
+﻿using System.Data;
+
+namespace LibrarySystem
 {
     internal class Program
     {
@@ -16,17 +18,17 @@
 
             titles[0] = "Math";
             ISDNs[0] = "1346";
-            bookAvailiabilityStatus= [true];
+            bookAvailiabilityStatus[0]= true;
             borrowNames[0] = "null";
             bookAuthers[0] = "Ali";
             LastBookIndexTreacker++;
 
 
-            titles[0] = "English";
-            ISDNs[0] = "3456";
-            bookAvailiabilityStatus = [true];
-            borrowNames[0] = "null";
-            bookAuthers[0] = "Fatma";
+            titles[1] = "English";
+            ISDNs[1] = "3456";
+            bookAvailiabilityStatus[1] = true;
+            borrowNames[1] = "null";
+            bookAuthers[1] = "Fatma";
             LastBookIndexTreacker++;
 
 
@@ -49,13 +51,14 @@
                 {
                     case 1:
                         //Add new book
+
                         Console.WriteLine("Enter a book title:"); 
-                        titles[LastBookIndexTreacker] = Console.ReadLine(); 
-                        bookAvailiabilityStatus = [true]; 
-                        Console.WriteLine("Availability of book: " + bookAvailiabilityStatus); 
+                        titles[LastBookIndexTreacker] = Console.ReadLine();
+                        bookAvailiabilityStatus[LastBookIndexTreacker] = true;
+                       Console.WriteLine("Availability of book: " + bookAvailiabilityStatus[LastBookIndexTreacker]); 
                         ISDNs[LastBookIndexTreacker] = "123" + LastBookIndexTreacker; 
                         Console.WriteLine("Book added successfully"); 
-                        Console.WriteLine("Book Number: " + ISDNs[LastBookIndexTreacker]); 
+                        Console.WriteLine("Book Number: " + ISDNs[LastBookIndexTreacker]);
                         LastBookIndexTreacker++;
 
 
@@ -108,7 +111,7 @@
                         Console.WriteLine("Enter return name of the book"); 
                         string returnBook = Console.ReadLine(); 
                         bool bookFound2 = false;
-                       
+
                         for (int i = 0; i < titles.Length; i++)
                         {
                             if (keyBook2 == ISDNs[i])
@@ -118,21 +121,15 @@
                                     borrowNames[i] = returnBook;
                                     bookFound2 = true;
                                     break;
+                                }
 
 
 
-
-
-
-                                   
                                 }
 
                             }
 
-                            }
-                            
-                        
-                        if (bookFound = false)
+                            if (bookFound2 == false)
                             {
                                 Console.WriteLine("book not found");
                             }
@@ -141,22 +138,77 @@
                                 Console.WriteLine("Retrun succeefuly");
                             }
 
+                        
+                        break;
+                    case 4:
+                        //Search book
+                        Console.WriteLine("Enter title of book");
+                        String titBook2 = Console.ReadLine();
+                        bool bookFound5 = false;
+                         
+                        
+                        for (int i = 0; i < titles.Length; i++)
+                        {
+                            if (titBook2 == titles[i])
+                            {
+                               
+                                bookFound5 =true;
+
+                                Console.WriteLine("Your book deatils : " );
+                                Console.WriteLine("Title of book : " + titles[i]);
+                                Console.WriteLine("ISBN of book : " + ISDNs[i]);
+                                Console.WriteLine("Auther of book : " + bookAuthers[i]);
+                                Console.WriteLine("borrow names of book : " + borrowNames[i]);
+                                if (bookAvailiabilityStatus[i])
+                                {
+                                    Console.WriteLine("book is avaiable ");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("book is  not avaiable ");
+
+                                }
+                                    break;
+                                
+
+                                    
+                            }
+
+                        }
+                        
+
+                        //output
+                        if (bookFound5 == false)
+                        {
+                            Console.WriteLine("sorry book not found");
+                        }
+
+                        else
+                        {
+
+
+                            Console.WriteLine("search succeefuly ");
+
+                        }
+
 
                         break;
 
-                    case 4:
-                        //Search book
+                    case 5:
+                        //List all available books
 
                         Console.WriteLine("Enter title of book");
                         String titBook3= Console.ReadLine();
                         bool accountFound4 = false;
-                       String currentBook = "NO0";
+                       
+                        String[] listOfBook =new string [100];
 
-                        for (int i = 0; i < 100; i++)
+                        for (int i = 0; i < titles.Length; i++)
                         {
                             if (titBook3 == titles[i])
                             {
-                                currentBook = ISDNs[i];
+                                listOfBook[i] = titles[i] + ISDNs[i] + bookAvailiabilityStatus[i] + borrowNames[i];
+                                Console.WriteLine("list of book: = " + listOfBook[i]);
                                 accountFound4 = true;
 
                                 break;
@@ -168,29 +220,19 @@
                         //output
                         if (accountFound4 == false)
                         {
-                            Console.WriteLine("sorry account not found");
+                            Console.WriteLine("sorry book not found");
                         }
 
                         else
                         {
 
 
-                            Console.WriteLine("Your book = " + currentBook + bookAvailiabilityStatus);
+                            Console.WriteLine("Thank you ");
 
                         }
 
                         break;
-                    case 5:
-                        //List all avaiable books
-                        for (int i = 0; i <titles.Length; i++)
-                        {
-                            Console.WriteLine("The books avciable in this library:");
-
-
-                            Console.WriteLine( titles[i] + ISDNs[i] + bookAvailiabilityStatus);
-                            
-                        }
-                        break;
+                    
                     case 6:
                         break;
 
