@@ -79,32 +79,35 @@ namespace LibrarySystem
                     case 2:
                         //Borrow book
 
-                        Console.WriteLine("Enter title  or ISDN of book:");
-                        String keyBook = Console.ReadLine();
-                       
+                        Console.Write("Enter ISBN or Title: ");
+                        string Input = Console.ReadLine();
                         
                         
-
-                        bool bookFound = false;
-
-                        for (int i = 0; i < 100; i++)
+                        
+                        bool Found = false;
+                        for (int i = 0; i <= LastBookIndexTreacker; i++)
                         {
-                            if (keyBook == titles[i] || keyBook== ISDNs[i] )
+                            if (titles[i] == Input || ISBN[i] == Input)
                             {
-                                borrowNames[i] = keyBook;
-
-                                bookFound = true;
+                              
+                                Found = true;
+                                if (bookAvailiabilityStatus[i] == true)
+                                {
+                                    Console.Write("Borrower name: ");
+                                    borrowNames[i] = Console.ReadLine();
+                                    bookAvailiabilityStatus[i] = false;
+                                    Console.WriteLine("Book borrowed successfully");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Book already borrowed");
+                                }
                                 break;
                             }
-
                         }
-                        if (bookFound == false)
+                        if (Found == false)
                         {
-                            Console.WriteLine("account not found");
-                        }
-                        else
-                        {
-                            Console.WriteLine("Borrow succeefuly");
+                            Console.WriteLine("Book not found");
                         }
 
                         break;
