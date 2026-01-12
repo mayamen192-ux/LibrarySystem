@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.ComponentModel.Design;
+using System.Data;
 
 namespace LibrarySystem
 {
@@ -8,27 +9,28 @@ namespace LibrarySystem
         {
             //sorted input
             string[] titles = new string[100];
-            string[] ISDNs = new string[100];
+            string[] ISBN = new string[100];
             bool[] bookAvailiabilityStatus = new bool[100];
             String[] borrowNames = new string[100];
             String[] bookAuthers = new string[100];
-            int LastBookIndexTreacker = -1;
+            int LastBookIndexTreacker = 0;
+
 
             //seed input
 
-            titles[0] = "Math";
-            ISDNs[0] = "1346";
-            bookAvailiabilityStatus[0]= true;
-            borrowNames[0] = null;
-            bookAuthers[0] = "Ali";
+            titles[LastBookIndexTreacker] = "Math";
+            ISBN[LastBookIndexTreacker] = "1111";
+            bookAvailiabilityStatus[LastBookIndexTreacker] = true;
+            borrowNames[LastBookIndexTreacker] = null;
+            bookAuthers[LastBookIndexTreacker] = "Ali";
             LastBookIndexTreacker++;
 
 
-            titles[1] = "English";
-            ISDNs[1] = "3456";
-            bookAvailiabilityStatus[1] = true;
-            borrowNames[1] = null;
-            bookAuthers[1] = "Fatma";
+            titles[LastBookIndexTreacker] = "English";
+            ISBN[LastBookIndexTreacker] = "2222";
+            bookAvailiabilityStatus[LastBookIndexTreacker] = false;
+            borrowNames[LastBookIndexTreacker] = "Ahmed";
+            bookAuthers[LastBookIndexTreacker] = "Fatma";
             LastBookIndexTreacker++;
 
 
@@ -51,15 +53,18 @@ namespace LibrarySystem
                 {
                     case 1:
                         //Add new book
-
-                        Console.WriteLine("Enter a book title:"); 
-                        titles[LastBookIndexTreacker] = Console.ReadLine();
-                        bookAvailiabilityStatus[LastBookIndexTreacker] = true;
-                       Console.WriteLine("Availability of book: " + bookAvailiabilityStatus[LastBookIndexTreacker]); 
-                        ISDNs[LastBookIndexTreacker] = "123" + LastBookIndexTreacker; 
-                        Console.WriteLine("Book added successfully"); 
-                        Console.WriteLine("Book Number: " + ISDNs[LastBookIndexTreacker]);
                         LastBookIndexTreacker++;
+
+                        Console.Write("Title: ");
+                        titles[LastBookIndexTreacker] = Console.ReadLine();
+                        Console.Write("Author: ");
+                        bookAuthers[LastBookIndexTreacker] = Console.ReadLine();
+                        Console.Write("ISBN: ");
+                        ISBN[LastBookIndexTreacker] = Console.ReadLine();
+                        bookAvailiabilityStatus[LastBookIndexTreacker] = true;
+                        borrowNames[LastBookIndexTreacker] = "";
+                        Console.WriteLine("Book added");
+
 
 
 
@@ -114,18 +119,23 @@ namespace LibrarySystem
 
                         for (int i = 0; i < titles.Length; i++)
                         {
-                            if (bookAvailiabilityStatus[i])
-                            { 
-                                borrowNames[i] = returnBook; 
-                                bookFound2 = true; 
-                                break; 
+                            if (keyBook2 == titles[i] && !bookAvailiabilityStatus[i])
+                            {
+                                if (borrowNames[i] == returnBook)
+                                {
+                                    bookAvailiabilityStatus[i] = true;
+                                    borrowNames[i] = null;
+                                    bookFound2 = true;
+                                    
+                                }
+                                else
+                                {
+                                    Console.WriteLine("his book was borrowed by someone else.");
+                                }
+                                break;
                             }
+
                         }
-
-
-
-                                
-
                             
 
                             if (bookFound2 == false)
@@ -236,6 +246,58 @@ namespace LibrarySystem
                     
                     case 6:
                         //transfer book operation
+                        Console.WriteLine("Enter isbn of book for first person:");
+                        String fISBN= Console.ReadLine();
+                        Console.WriteLine("Enter isbn of book for second person");
+                        String sISBN = Console.ReadLine();
+
+                        bool firstFound = false;
+                        int currentBorrow = -1;
+                        string temp = " ";
+
+                        for (int i = 0; i < 100; i++)
+                        {
+                            if (fISBN == ISDNs[i])
+                            {
+                                currentBorrow = i;
+                                firstFound = true;
+                                break;
+                            }
+                        }
+                        if (firstFound == false)
+                        {
+                            Console.WriteLine("first book not found");
+                        }
+                        else
+                        {
+                            bool secondFound = false;
+                            int secondBorrow = -1;
+                            for (int i = 0; i < 100; i++)
+                            {
+                                if (sISBN == ISDNs[i])
+                                {
+                                    secondBorrow = i;
+                                    secondFound = true;
+                                    break;
+                                }
+                            }
+                            if (secondFound == false)
+                            {
+                                Console.WriteLine("second book not found");
+                            }
+                            else
+                            {
+                                temp = ISDNs[currentBorrow]; 
+                                ISDNs[currentBorrow] = ISDNs[secondBorrow]; 
+                                ISDNs[secondBorrow] = temp;
+
+                                Console.WriteLine(" transfer successfully  " + temp);
+                            }
+                           
+
+
+                }
+                        
 
                         break;
 
