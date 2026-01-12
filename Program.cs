@@ -114,43 +114,27 @@ namespace LibrarySystem
 
                     case 3:
                         //Return book
-                        Console.WriteLine("Enter title or ISDN of book:");
-                        String keyBook2= Console.ReadLine();
-                        Console.WriteLine("Enter return name of the book"); 
-                        string returnBook = Console.ReadLine(); 
-                        bool bookFound2 = false;
-
-                        for (int i = 0; i < titles.Length; i++)
+                        Console.Write("Enter ISBN or Title: ");
+                        string input = Console.ReadLine();
+                        bool found = false;
+                        for (int i = 0; i <= LastBookIndexTreacker; i++)
                         {
-                            if (keyBook2 == titles[i] && !bookAvailiabilityStatus[i])
+                            if (titles[i] == input || ISBN[i] == input)
                             {
-                                if (borrowNames[i] == returnBook)
-                                {
-                                    bookAvailiabilityStatus[i] = true;
-                                    borrowNames[i] = null;
-                                    bookFound2 = true;
-                                    
-                                }
-                                else
-                                {
-                                    Console.WriteLine("his book was borrowed by someone else.");
-                                }
+                                //book is found in system
+                                found = true;
+                                borrowNames[i] = "";
+                                bookAvailiabilityStatus[i] = true;
+                                Console.WriteLine("Book returned successfully");
+
                                 break;
                             }
-
                         }
-                            
+                        if (found == false)
+                        {
+                            Console.WriteLine("Book not found");
+                        }
 
-                            if (bookFound2 == false)
-                            {
-                                Console.WriteLine("book not found");
-                            }
-                            else
-                            {
-                                Console.WriteLine("Retrun succeefuly");
-                            }
-
-                        
                         break;
                     case 4:
                         //Search book
