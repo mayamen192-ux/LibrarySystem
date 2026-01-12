@@ -19,7 +19,7 @@ namespace LibrarySystem
             titles[0] = "Math";
             ISDNs[0] = "1346";
             bookAvailiabilityStatus[0]= true;
-            borrowNames[0] = "null";
+            borrowNames[0] = null;
             bookAuthers[0] = "Ali";
             LastBookIndexTreacker++;
 
@@ -27,7 +27,7 @@ namespace LibrarySystem
             titles[1] = "English";
             ISDNs[1] = "3456";
             bookAvailiabilityStatus[1] = true;
-            borrowNames[1] = "null";
+            borrowNames[1] = null;
             bookAuthers[1] = "Fatma";
             LastBookIndexTreacker++;
 
@@ -114,20 +114,19 @@ namespace LibrarySystem
 
                         for (int i = 0; i < titles.Length; i++)
                         {
-                            if (keyBook2 == ISDNs[i])
-                            {
-                                if (bookAvailiabilityStatus[i] = true)
-                                {
-                                    borrowNames[i] = returnBook;
-                                    bookFound2 = true;
-                                    break;
-                                }
-
-
-
-                                }
-
+                            if (bookAvailiabilityStatus[i])
+                            { 
+                                borrowNames[i] = returnBook; 
+                                bookFound2 = true; 
+                                break; 
                             }
+                        }
+
+
+
+                                
+
+                            
 
                             if (bookFound2 == false)
                             {
@@ -236,6 +235,8 @@ namespace LibrarySystem
                         break;
                     
                     case 6:
+                        //transfer book operation
+
                         break;
 
 
