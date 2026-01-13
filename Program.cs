@@ -217,9 +217,10 @@ namespace LibrarySystem
                                 temp = borrowNames[firstBorrowerIndex];
                                 borrowNames[firstBorrowerIndex] = borrowNames[secondBorrowerIndex];
                                 borrowNames[secondBorrowerIndex] = temp;
+                                Console.WriteLine("Transfer books done successfully" +"  "+"Frist borrow name:  "+ borrowNames[secondBorrowerIndex] +" "+ "Second borrow name:  " +borrowNames[firstBorrowerIndex]);
                             }
                         }
-
+                        
 
                         break;
 
