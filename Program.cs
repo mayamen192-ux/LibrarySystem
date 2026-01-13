@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.Design;
 using System.Data;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace LibrarySystem
 {
@@ -8,13 +9,16 @@ namespace LibrarySystem
         static void Main(string[] args)
         {
             //sorted input
+            
             string[] titles = new string[100];
             string[] ISBN = new string[100];
             bool[] bookAvailiabilityStatus = new bool[100];
-            String[] borrowNames = new string[100];
-            String[] bookAuthers = new string[100];
+            string[] borrowNames = new string[100];
+            string[] bookAuthers = new string[100];
             string[] bookCategories = new string[100];
             int[] borrowCount =new int [100];
+            DateOnly[] returndate = new DateOnly[100];
+            double[] lateFees = new double[100];
             int LastBookIndexTreacker = 0;
 
 
@@ -27,6 +31,7 @@ namespace LibrarySystem
             bookAuthers[LastBookIndexTreacker] = "Ali";
             bookCategories[LastBookIndexTreacker] = "Science";
             borrowCount[LastBookIndexTreacker] = 0;
+            
             LastBookIndexTreacker++;
 
 
@@ -37,6 +42,7 @@ namespace LibrarySystem
             bookAuthers[LastBookIndexTreacker] = "Fatma";
             bookCategories[LastBookIndexTreacker] = "computer";
             borrowCount[LastBookIndexTreacker] = 2;
+            
             LastBookIndexTreacker++;
 
 
@@ -52,8 +58,9 @@ namespace LibrarySystem
                 Console.WriteLine("5. List All available Book");
                 Console.WriteLine("6. Tranfer Book");
                 Console.WriteLine("7. Search Books by Category");
-                Console.WriteLine("8. View Most Popular Books");             
-                Console.WriteLine("9. Exit");
+                Console.WriteLine("8. View Most Popular Books");
+                Console.WriteLine("9. calculating late fees ");
+                Console.WriteLine("`10. Exit");
                 Console.Write("Please select an option: ");
                 int option = int.Parse(Console.ReadLine());
 
@@ -73,9 +80,7 @@ namespace LibrarySystem
                         borrowNames[LastBookIndexTreacker] = "";
                         Console.Write("bookCategories: ");
                         bookCategories[LastBookIndexTreacker] = Console.ReadLine();
-                        Console.Write("borrowCount: ");
-                        borrowCount[LastBookIndexTreacker] = int.Parse(Console.ReadLine());
-                        
+
                         Console.WriteLine("Book added");
 
 
@@ -96,14 +101,15 @@ namespace LibrarySystem
                         Console.Write("Enter ISBN or Title: ");
                         string Input = Console.ReadLine();
                         
-                        
-                        
+
+
                         bool Found = false;
                         for (int i = 0; i <= LastBookIndexTreacker; i++)
                         {
+                            
                             if (titles[i] == Input || ISBN[i] == Input)
                             {
-                              
+
                                 Found = true;
                                 if (bookAvailiabilityStatus[i] == true)
                                 {
@@ -112,12 +118,14 @@ namespace LibrarySystem
                                     borrowNames[i] = Console.ReadLine();
                                     bookAvailiabilityStatus[i] = false;
                                     Console.WriteLine("Book borrowed successfully");
+                                    Console.WriteLine("borrow count is :" +borrowCount[i]);
+
                                 }
                                 else
                                 {
                                     Console.WriteLine("Book already borrowed");
                                 }
-                                break;
+                               
                             }
                         }
                         if (Found == false)
@@ -132,23 +140,30 @@ namespace LibrarySystem
                         Console.Write("Enter ISBN or Title: ");
                         string input = Console.ReadLine();
                         bool found = false;
+
                         for (int i = 0; i <= LastBookIndexTreacker; i++)
                         {
+                           
+
                             if (titles[i] == input || ISBN[i] == input)
                             {
+
                                 //book is found in system
                                 found = true;
                                 borrowNames[i] = "";
                                 bookAvailiabilityStatus[i] = true;
                                 Console.WriteLine("Book returned successfully");
-
                                 break;
                             }
                         }
-                        if (found == false)
-                        {
-                            Console.WriteLine("Book not found");
-                        }
+                            
+                           
+                            if (found == false)
+                            {
+                                Console.WriteLine("Book not found");
+                                
+                            }
+                        
 
                         break;
                     case 4:
@@ -162,7 +177,7 @@ namespace LibrarySystem
                             {
                                 //book is found in system
                                 FOUND = true;
-                                Console.WriteLine("Book title: " + titles[i] + ", Book Author:" + bookAuthers[i] + ", Book ISBN:" + ISBN[i] + ", Book availability:" + bookAvailiabilityStatus[i]+ "bookCategories:"+ bookCategories[LastBookIndexTreacker]+ "borrowCount: "+ borrowCount[LastBookIndexTreacker]);
+                                Console.WriteLine("Book title: " + titles[i] + ", Book Author:" + bookAuthers[i] + ", Book ISBN:" + ISBN[i] + ", Book availability:" + bookAvailiabilityStatus[i] + "bookCategories:" + bookCategories[LastBookIndexTreacker] );
                                 break;
                             }
                         }
@@ -182,12 +197,12 @@ namespace LibrarySystem
                         {
                             if (bookAvailiabilityStatus[i] == true)
                             {
-                                Console.WriteLine("Title: " + titles[i] + " Author: " + bookAuthers[i] + " ISBN: " + ISBN[i]+ "bookCategories: "+ bookCategories[LastBookIndexTreacker]+ "borrowCount: "+ borrowCount[LastBookIndexTreacker]);
+                                Console.WriteLine("Title: " + titles[i] + " Author: " + bookAuthers[i] + " ISBN: " + ISBN[i] + "bookCategories: " + bookCategories[LastBookIndexTreacker] );
                             }
                         }
 
                         break;
-                    
+
                     case 6:
                         //transfer book operation
                         Console.Write("Enter first borrower name:");
@@ -200,7 +215,7 @@ namespace LibrarySystem
                         {
                             if (firstBorrower == borrowNames[i])
                             {
-                                firstBorrowerIndex = i; 
+                                firstBorrowerIndex = i;
                                 firstBorrowerFound = true;
                                 break;
                             }
@@ -232,18 +247,18 @@ namespace LibrarySystem
                                 temp = borrowNames[firstBorrowerIndex];
                                 borrowNames[firstBorrowerIndex] = borrowNames[secondBorrowerIndex];
                                 borrowNames[secondBorrowerIndex] = temp;
-                                Console.WriteLine("Transfer books done successfully" +"  "+"Frist borrow name:  "+ borrowNames[secondBorrowerIndex] +" "+ "Second borrow name:  " +borrowNames[firstBorrowerIndex]);
+                                Console.WriteLine("Transfer books done successfully" + "  " + "Frist borrow name:  " + borrowNames[secondBorrowerIndex] + " " + "Second borrow name:  " + borrowNames[firstBorrowerIndex]);
                             }
                         }
-                        
+
 
                         break;
 
                     case 7:
                         //Search Books by Category
                         Console.WriteLine("enter what book category you want:");
-                        String Category= Console.ReadLine();
-                        
+                        string Category = Console.ReadLine();
+
                         bool FOUND2 = false;
                         for (int i = 0; i <= LastBookIndexTreacker; i++)
                         {
@@ -257,7 +272,7 @@ namespace LibrarySystem
                             }
                         }
 
-                       if (FOUND2 == false)
+                        if (FOUND2 == false)
                         {
                             Console.WriteLine("Category not found");
                         }
@@ -266,9 +281,43 @@ namespace LibrarySystem
                         break;
 
                     case 8:
-                        break;
+                        //View Most Popular Books
+                        int largest = int.MinValue;
+                        int mostPopularIndex = -1;
+                        
+                        for (int i = 0; i <= LastBookIndexTreacker; i++)
+                        {
 
+                            if (borrowCount[i] > largest)
+                            {
+                                largest = borrowCount[i];
+                                mostPopularIndex = i;
+                               
+
+                            }
+                        }
+                            Console.WriteLine("The book which is most puplar is "  +largest);
+                        
+                            break;
                     case 9:
+                        //calculate late fees 
+                        Console.Write("Enter ISBN or Title: "); 
+                        string input2 = Console.ReadLine();
+                        bool found2 = false;
+                        for (int i = 0; i <= LastBookIndexTreacker; i++)
+                        {
+                            if (titles[i] == input2 || ISBN[i] == input2)
+                            {
+                                found = true; 
+                                bookAvailiabilityStatus[i] = true;
+                                borrowNames[i] = ""; 
+                                Console.WriteLine("Book returned successfully");
+                                //DateTime dueDate = returndate[i].AddDays(7);
+                                //DateTime returnDate = DateTime.Now;
+
+                                break;
+
+                    case 10:
                             Console.WriteLine("Exiting program...");
                             Console.WriteLine("-----------------------------");
                             exit = true;
