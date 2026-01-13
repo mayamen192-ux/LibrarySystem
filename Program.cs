@@ -13,6 +13,8 @@ namespace LibrarySystem
             bool[] bookAvailiabilityStatus = new bool[100];
             String[] borrowNames = new string[100];
             String[] bookAuthers = new string[100];
+            string[] bookCategories = new string[100];
+            int[] borrowCount =new int [100];
             int LastBookIndexTreacker = 0;
 
 
@@ -23,14 +25,18 @@ namespace LibrarySystem
             bookAvailiabilityStatus[LastBookIndexTreacker] = true;
             borrowNames[LastBookIndexTreacker] = null;
             bookAuthers[LastBookIndexTreacker] = "Ali";
+            bookCategories[LastBookIndexTreacker] = "Science";
+            borrowCount[LastBookIndexTreacker] = 0;
             LastBookIndexTreacker++;
 
 
-            titles[LastBookIndexTreacker] = "English";
+            titles[LastBookIndexTreacker] = "network";
             ISBN[LastBookIndexTreacker] = "2222";
             bookAvailiabilityStatus[LastBookIndexTreacker] = false;
             borrowNames[LastBookIndexTreacker] = "Ahmed";
             bookAuthers[LastBookIndexTreacker] = "Fatma";
+            bookCategories[LastBookIndexTreacker] = "computer";
+            borrowCount[LastBookIndexTreacker] = 2;
             LastBookIndexTreacker++;
 
 
@@ -45,7 +51,9 @@ namespace LibrarySystem
                 Console.WriteLine("4. Search Book");
                 Console.WriteLine("5. List All available Book");
                 Console.WriteLine("6. Tranfer Book");
-                Console.WriteLine("7. Exit");
+                Console.WriteLine("7. Search Books by Category");
+                Console.WriteLine("8. View Most Popular Books");             
+                Console.WriteLine("9. Exit");
                 Console.Write("Please select an option: ");
                 int option = int.Parse(Console.ReadLine());
 
@@ -63,7 +71,13 @@ namespace LibrarySystem
                         ISBN[LastBookIndexTreacker] = Console.ReadLine();
                         bookAvailiabilityStatus[LastBookIndexTreacker] = true;
                         borrowNames[LastBookIndexTreacker] = "";
+                        Console.Write("bookCategories: ");
+                        bookCategories[LastBookIndexTreacker] = Console.ReadLine();
+                        Console.Write("borrowCount: ");
+                        borrowCount[LastBookIndexTreacker] = int.Parse(Console.ReadLine());
+                        
                         Console.WriteLine("Book added");
+
 
 
 
@@ -93,6 +107,7 @@ namespace LibrarySystem
                                 Found = true;
                                 if (bookAvailiabilityStatus[i] == true)
                                 {
+                                    borrowCount[i]++;
                                     Console.Write("Borrower name: ");
                                     borrowNames[i] = Console.ReadLine();
                                     bookAvailiabilityStatus[i] = false;
@@ -147,7 +162,7 @@ namespace LibrarySystem
                             {
                                 //book is found in system
                                 FOUND = true;
-                                Console.WriteLine("Book title: " + titles[i] + ", Book Author:" + bookAuthers[i] + ", Book ISBN:" + ISBN[i] + ", Book availability:" + bookAvailiabilityStatus[i]);
+                                Console.WriteLine("Book title: " + titles[i] + ", Book Author:" + bookAuthers[i] + ", Book ISBN:" + ISBN[i] + ", Book availability:" + bookAvailiabilityStatus[i]+ "bookCategories:"+ bookCategories[LastBookIndexTreacker]+ "borrowCount: "+ borrowCount[LastBookIndexTreacker]);
                                 break;
                             }
                         }
@@ -167,7 +182,7 @@ namespace LibrarySystem
                         {
                             if (bookAvailiabilityStatus[i] == true)
                             {
-                                Console.WriteLine("Title: " + titles[i] + " Author: " + bookAuthers[i] + " ISBN: " + ISBN[i]);
+                                Console.WriteLine("Title: " + titles[i] + " Author: " + bookAuthers[i] + " ISBN: " + ISBN[i]+ "bookCategories: "+ bookCategories[LastBookIndexTreacker]+ "borrowCount: "+ borrowCount[LastBookIndexTreacker]);
                             }
                         }
 
@@ -224,17 +239,44 @@ namespace LibrarySystem
 
                         break;
 
-
-
                     case 7:
-                        Console.WriteLine("Exiting program...");
-                        Console.WriteLine("-----------------------------");
-                        exit = true;
+                        //Search Books by Category
+                        Console.WriteLine("enter what book category you want:");
+                        String Category= Console.ReadLine();
+                        
+                        bool FOUND2 = false;
+                        for (int i = 0; i <= LastBookIndexTreacker; i++)
+                        {
+
+                            if (bookCategories[i] == Category)
+                            {
+
+                                FOUND2 = true;
+                                Console.WriteLine("Title: " + titles[i] + " ,Author: " + bookAuthers[i] + ", ISBN: " + ISBN[i] + ", Book availability:" + bookAvailiabilityStatus[i]);
+
+                            }
+                        }
+
+                       if (FOUND2 == false)
+                        {
+                            Console.WriteLine("Category not found");
+                        }
+
+
                         break;
-                    default:
-                        Console.WriteLine("Invalid option. Please try again.");
+
+                    case 8:
                         break;
-                }
+
+                    case 9:
+                            Console.WriteLine("Exiting program...");
+                            Console.WriteLine("-----------------------------");
+                            exit = true;
+                            break;
+                        default:
+                            Console.WriteLine("Invalid option. Please try again.");
+                            break;
+                        }
 
                 Console.WriteLine("Thank you for using the Library System, press any key");
                 Console.ReadLine();
