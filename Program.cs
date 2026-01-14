@@ -115,14 +115,15 @@ namespace LibrarySystem
                                     Console.Write("Borrower name: ");
                                     borrowNames[i] = Console.ReadLine();
                                     bookAvailiabilityStatus[i] = false;
-                                    borrowCount[i]++; // NEW - Increment borrow count
-                                    lateFees[i] = 0; // NEW - Initialize late fees
+                                    borrowCount[i]++; 
+                                    lateFees[i] = 0;
 
                                     Console.WriteLine("Book borrowed successfully!");
-                                    Console.WriteLine("This book has been borrowed " + borrowCount[i] + " times"); // NEW
+                                    Console.WriteLine("This book has been borrowed " + borrowCount[i] + " times"); 
                                 }
                                 else
                                 {
+                                    
                                     Console.WriteLine("Book already borrowed by: " + borrowNames[i]);
                                 }
 
@@ -142,30 +143,32 @@ namespace LibrarySystem
                         string returnInput = Console.ReadLine();
 
                         bool returnFound = false;
-
+                        //for search book with following requiements
                         for (int i = 0; i <= LastBookIndexTreacker; i++)
                         {
                             if (titles[i] == returnInput || ISBN[i] == returnInput)
                             {
                                 returnFound = true;
+                                //if book borrowed
 
-                                if (bookAvailiabilityStatus[i] == false) // Check if book is actually borrowed
+                                if (bookAvailiabilityStatus[i] == false) 
                                 {
-                                    Console.Write("Is the book returned late? (yes/no): "); // NEW
-                                    string isLate = Console.ReadLine().ToLower();
-
+                                   
+                                    Console.Write("Is the book returned late? (yes/no): "); 
+                                    string isLate = Console.ReadLine();
+                                    //if book not return on time
                                     if (isLate == "yes")
                                     {
-                                        Console.Write("Enter number of days late: "); // NEW
+                                        Console.Write("Enter number of days late: "); 
                                         int daysLate = int.Parse(Console.ReadLine());
                                         double feePerDay = 0.5;
-                                        lateFees[i] = daysLate * feePerDay; // NEW - Calculate late fee
+                                        lateFees[i] = daysLate * feePerDay; 
 
-                                        Console.WriteLine("Late fee calculated: " + lateFees[i] + " OMR"); // NEW
+                                        Console.WriteLine("Late fee calculated: " + lateFees[i] + " OMR"); 
                                     }
                                     else
                                     {
-                                        Console.WriteLine("Book returned on time"); // NEW
+                                        Console.WriteLine("Book returned on time"); 
                                         lateFees[i] = 0;
                                     }
 
@@ -199,9 +202,9 @@ namespace LibrarySystem
                         {
                             if (titles[i] == INPUT || ISBN[i] == INPUT)
                             {
-                                //book is found in system
+                                
                                 FOUND = true;
-                                Console.WriteLine("Book title: " + titles[i] + ", Book Author:" + bookAuthers[i] + ", Book ISBN:" + ISBN[i] + ", Book availability:" + bookAvailiabilityStatus[i] + "bookCategories:" + bookCategories[LastBookIndexTreacker] );
+                                Console.WriteLine("Book title: " + titles[i] + ", Book Author:" + bookAuthers[i] + ", Book ISBN:" + ISBN[i] + ", Book availability:" + bookAvailiabilityStatus[i] + ", bookCategories:" + bookCategories[LastBookIndexTreacker] );
                                 break;
                             }
                         }
@@ -221,6 +224,7 @@ namespace LibrarySystem
                         {
                             if (bookAvailiabilityStatus[i] == true)
                             {
+                                //print all avaiable books with thier details
                                 Console.WriteLine("Title: " + titles[i] + " Author: " + bookAuthers[i] + " ISBN: " + ISBN[i] + "bookCategories: " + bookCategories[LastBookIndexTreacker] );
                             }
                         }
@@ -309,8 +313,8 @@ namespace LibrarySystem
                         Console.WriteLine("Most Popular Books (by borrow count):");
                         
 
-                        // Simple sorting by displaying in order
-                        for (int count = 100; count >= 0; count--) // Start from highest possible count
+                       //for strat from highest borrow count 
+                        for (int count = 100; count >= 0; count--) 
                         {
                             for (int i = 0; i <= LastBookIndexTreacker; i++)
                             {
@@ -335,7 +339,7 @@ namespace LibrarySystem
 
                         if (feeOption == 1)
                         {
-                            // System-wide total
+                           //for sysyem option
                             double totalFees = 0;
 
                             for (int i = 0; i <= LastBookIndexTreacker; i++)
@@ -348,7 +352,7 @@ namespace LibrarySystem
                         }
                         else if (feeOption == 2)
                         {
-                            // Individual borrower
+                            //for indiviual option
                             Console.Write("Enter borrower name: ");
                             string borrowerName = Console.ReadLine();
 
@@ -359,7 +363,7 @@ namespace LibrarySystem
                             {
                                 if (borrowNames[i] == borrowerName || (borrowNames[i] == "" && lateFees[i] > 0))
                                 {
-                                    // Check if this borrower had late fees
+                                    // for checking if this borrower had late fees
                                     borrowerFees += lateFees[i];
                                     borrowerFoundForFees = true;
                                 }
