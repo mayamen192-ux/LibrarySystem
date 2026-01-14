@@ -409,12 +409,14 @@ namespace LibrarySystem
                                     lateFees[i] = 0;
 
                                     Console.WriteLine("Book borrowed successfully!");
-                                 
-                                   Console.WriteLine("This book has been borrowed " + borrowCount[i] + " times");
+                          Console.WriteLine("This book has been borrowed " + borrowCount[i] + " times");
+                                    //nested loop for duplicate borrow names
                                     for(int j = 0; j <= LastBookIndexTreacker; j++)
                                     {
+                                        //checking if same borrower borrowed two different books by know their ISBN
                                         if (i != j && ISBN[i] == ISBN[j]) 
                                         {
+                                            //print all duplicate borrowers
                                             Console.WriteLine("Duplicate found: ISBN: " + ISBN[j] + " | Title: " + titles[j] + " | Author: " + bookAuthers[j] + " | Category: " + bookCategories[j] + " | Times Borrowed: " + borrowCount[j]); 
                                         }
                                     }
