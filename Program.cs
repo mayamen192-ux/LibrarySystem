@@ -29,7 +29,7 @@ namespace LibrarySystem
             ISBN[LastBookIndexTreacker] = "1111";
             bookAvailiabilityStatus[LastBookIndexTreacker] = true;
             borrowNames[LastBookIndexTreacker] = null;
-            bookAuthers[LastBookIndexTreacker] = "Ali";
+            bookAuthers[LastBookIndexTreacker] = "";
             bookCategories[LastBookIndexTreacker] = "Science";
             borrowCount[LastBookIndexTreacker] = 0;
             
@@ -472,15 +472,30 @@ namespace LibrarySystem
                             else
                             {
                                 //before transfering show user all borrowed books
-                                Console.WriteLine("The books borrowed in this library are:"+ borrowNames[LastBookIndexTreacker]);
-                               //let user choose one to transfer by ISBN
-                                Console.WriteLine("choose what book you want to tranfered:");
-                                string choose = Console.ReadLine();
-                                choose = ISBN[LastBookIndexTreacker];
-                                Console.WriteLine(choose);
+                                Console.WriteLine("The books borrowed in this library are:"); 
+                                for (int i = 0; i <= LastBookIndexTreacker; i++) 
+                                { 
+                                    Console.WriteLine(ISBN[i] + " - " + borrowNames[i]);
+                                }
+                                //let user choose one to transfer by ISBN
+                                Console.WriteLine("Choose ISBN of the book to transfer:"); 
+                                string chosenISBN = Console.ReadLine();
+                                for (int i = 0; i <= LastBookIndexTreacker; i++)
+                                {
+                                    if (ISBN[i] == chosenISBN && borrowNames[i] == firstBorrower2)
+                                    {
+                                        if (ISBN[i] == chosenISBN && borrowNames[i] == firstBorrower2)
+                                        { 
+                                            borrowNames[i] = secondBorrower2;
+                                            Console.WriteLine("Transfer successful: Book " + chosenISBN + " moved from " + firstBorrower2 + " to " + secondBorrower2); 
+                                           
+                                        }
+                                    }
+                                }
+                            
 
-                                //transfer first borrower with second borrower
-                                string temp = "";
+                            //transfer first borrower with second borrower
+                            string temp = "";
                                 temp = borrowNames[firstBorrowerIndex2];
                                 borrowNames[firstBorrowerIndex2] = borrowNames[secondBorrowerIndex];
                                 borrowNames[secondBorrowerIndex] = temp;
