@@ -61,7 +61,8 @@ namespace LibrarySystem
                 Console.WriteLine("7. Search Books by Category");
                 Console.WriteLine("8. View Most Popular Books");
                 Console.WriteLine("9. calculating late fees ");
-                Console.WriteLine("`10. Exit");
+                Console.WriteLine("10.  borrow for duplicate  ");
+                Console.WriteLine("11. Exit");
                 Console.Write("Please select an option: ");
                 int option = int.Parse(Console.ReadLine());
 
@@ -109,7 +110,7 @@ namespace LibrarySystem
                             if (titles[i] == borrowInput ||ISBN[i] == borrowInput)
                             {
                                 borrowFound = true;
-
+                                //if book is not borrow
                                 if (bookAvailiabilityStatus[i] == true)
                                 {
                                     Console.Write("Borrower name: ");
@@ -200,6 +201,7 @@ namespace LibrarySystem
                         bool FOUND = false;
                         for (int i = 0; i <= LastBookIndexTreacker; i++)
                         {
+                            //checking for book requriements
                             if (titles[i] == INPUT || ISBN[i] == INPUT)
                             {
                                 
@@ -241,6 +243,7 @@ namespace LibrarySystem
                         int firstBorrowerIndex = 0;
                         for (int i = 0; i <= LastBookIndexTreacker; i++)
                         {
+                            //checking for first borrower
                             if (firstBorrower == borrowNames[i])
                             {
                                 firstBorrowerIndex = i;
@@ -256,6 +259,7 @@ namespace LibrarySystem
                         {
                             bool secondBorrowerFound = false;
                             int secondBorrowerIndex = 0;
+                            //checking for second borrower
                             for (int i = 0; i < 100; i++)
                             {
                                 if (secondBorrower == borrowNames[i])
@@ -271,6 +275,7 @@ namespace LibrarySystem
                             }
                             else
                             {
+                                //transfer first borrower with second borrower
                                 string temp = "";
                                 temp = borrowNames[firstBorrowerIndex];
                                 borrowNames[firstBorrowerIndex] = borrowNames[secondBorrowerIndex];
@@ -293,8 +298,9 @@ namespace LibrarySystem
 
                             if (bookCategories[i] == Category)
                             {
-
+                                
                                 FOUND2 = true;
+                                //print all books in category that user choosed
                                 Console.WriteLine("Title: " + titles[i] + " ,Author: " + bookAuthers[i] + ", ISBN: " + ISBN[i] + ", Book availability:" + bookAvailiabilityStatus[i]);
 
                             }
@@ -381,8 +387,47 @@ namespace LibrarySystem
                         }
 
                         break;
-
                     case 10:
+                        //edit borrow
+                        Console.Write("Enter ISBN or Title: ");
+                        string borrowInput2 = Console.ReadLine();
+
+                        bool borrowFound2 = false;
+
+                        for (int i = 0; i <= LastBookIndexTreacker; i++)
+                        {
+                            if (titles[i] == borrowInput2 || ISBN[i] == borrowInput2)
+                            {
+                                borrowFound2 = true;
+                                //if book is not borrow
+                                if (bookAvailiabilityStatus[i] == true)
+                                {
+                                    Console.Write("Borrower name: ");
+                                    borrowNames[i] = Console.ReadLine();
+                                    bookAvailiabilityStatus[i] = false;
+                                    borrowCount[i]++;
+                                    lateFees[i] = 0;
+
+                                    Console.WriteLine("Book borrowed successfully!");
+                                 
+                                   Console.WriteLine("This book has been borrowed " + borrowCount[i] + " times");
+                                    for(int j = 0; j <= LastBookIndexTreacker; j++)
+                                    {
+                                        if (i != j && ISBN[i] == ISBN[j]) 
+                                        {
+                                            Console.WriteLine("Duplicate found: ISBN: " + ISBN[j] + " | Title: " + titles[j] + " | Author: " + bookAuthers[j] + " | Category: " + bookCategories[j] + " | Times Borrowed: " + borrowCount[j]); 
+                                        }
+                                    }
+                                }
+                                else {
+                                    Console.WriteLine("Book already borrowed by: " + borrowNames[i]); 
+                                }
+                               
+                            } }
+
+                        break;
+
+                    case 11:
                             Console.WriteLine("Exiting program...");
                             Console.WriteLine("-----------------------------");
                             exit = true;
