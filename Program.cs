@@ -62,7 +62,8 @@ namespace LibrarySystem
                 Console.WriteLine("8. View Most Popular Books");
                 Console.WriteLine("9. calculating late fees ");
                 Console.WriteLine("10.  borrow for duplicate  ");
-                Console.WriteLine("11. Exit");
+                Console.WriteLine("11.  Transfer in case duplacting borrowers ");
+                Console.WriteLine("12. Exit");
                 Console.Write("Please select an option: ");
                 int option = int.Parse(Console.ReadLine());
 
@@ -428,8 +429,69 @@ namespace LibrarySystem
                             } }
 
                         break;
-
                     case 11:
+                        //Transfer in case duplacting borrowers
+                        Console.Write("Enter first borrower name:");
+                        string firstBorrower2 = Console.ReadLine();
+                        Console.Write("Enter second borrower name:");
+                        string secondBorrower2 = Console.ReadLine();
+                        bool firstBorrowerFound2 = false;
+                        int firstBorrowerIndex2 = 0;
+                        for (int i = 0; i <= LastBookIndexTreacker; i++)
+                        {
+                            //checking for first borrower
+                            if (firstBorrower2 == borrowNames[i])
+                            {
+                                firstBorrowerIndex = i;
+                                firstBorrowerFound = true;
+                                break;
+                            }
+                        }
+                        if (firstBorrowerFound2 == false)
+                        {
+                            Console.WriteLine("current borrower name not found");
+                        }
+                        else
+                        {
+                            bool secondBorrowerFound = false;
+                            int secondBorrowerIndex = 0;
+                            //checking for second borrower
+                            for (int i = 0; i < 100; i++)
+                            {
+                                if (secondBorrower2 == borrowNames[i])
+                                {
+                                    secondBorrowerIndex = i;
+                                    secondBorrowerFound = true;
+                                    break;
+                                }
+                            }
+                            if (secondBorrowerFound == false)
+                            {
+                                Console.WriteLine("New borrower name not found");
+                            }
+                            else
+                            {
+                                //before transfering show user all borrowed books
+                                Console.WriteLine("The books borrowed in this library are:"+ borrowNames[LastBookIndexTreacker]);
+                               //let user choose one to transfer by ISBN
+                                Console.WriteLine("choose what book you want to tranfered:");
+                                string choose = Console.ReadLine();
+                                choose = ISBN[LastBookIndexTreacker];
+                                Console.WriteLine(choose);
+
+                                //transfer first borrower with second borrower
+                                string temp = "";
+                                temp = borrowNames[firstBorrowerIndex2];
+                                borrowNames[firstBorrowerIndex2] = borrowNames[secondBorrowerIndex];
+                                borrowNames[secondBorrowerIndex] = temp;
+                                Console.WriteLine("Transfer books done successfully" + "  " + "Frist borrow name:  " + borrowNames[secondBorrowerIndex] + " " + "Second borrow name:  " + borrowNames[firstBorrowerIndex2]);
+                            }
+                        }
+
+
+                        break;
+
+                    case 12:
                             Console.WriteLine("Exiting program...");
                             Console.WriteLine("-----------------------------");
                             exit = true;
